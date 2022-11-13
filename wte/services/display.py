@@ -41,6 +41,7 @@ def build_restaurant_table(restaurant: Restaurant) -> Table:
 
     table.add_row("Rating", restaurant.format_rating())
     table.add_row("Price", restaurant.format_price_range())
+    table.add_row("Website", restaurant.format_public_url())
     table.add_row("Phone", restaurant.format_phone())
     table.add_row("Payment Methods", restaurant.format_allowed_payment_methods())
     table.add_row("Tags", restaurant.format_tags())

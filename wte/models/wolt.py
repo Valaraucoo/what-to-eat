@@ -25,6 +25,7 @@ class Venue(HashableModel):
     currency: str
     delivery_price_int: int
     estimate_range: str
+    estimate: float
     delivers: bool
     short_description: str | None
     tags: list[str]
@@ -43,8 +44,10 @@ class Venue(HashableModel):
         return self.estimate_range.replace("-", " - ") + " min"
 
     def format_delivery_price(self) -> str:
-        if not self.delivery_price_int:
+        if self.delivery_price_int is None:
             return "-"
+        if not self.delivers:
+            return "(No delivery)"
         return f"{self.delivery_price_int / 100:.2f} {self.currency}"
 
     def format_rating(self) -> str:

@@ -22,7 +22,16 @@ def sections(location: Location) -> list[Section]:
         "lat": location.lat,
         "lon": location.lon,
     })
-    response = httpx.get(consumer_wolt_api_url, params=params)
+
+    # TODO: add language to config
+    headers = {
+        "app-language": "en",
+    }
+    response = httpx.get(
+        consumer_wolt_api_url,
+        params=params,
+        headers=headers
+    )
 
     if not response.is_success:
         raise WoltApiError()
@@ -30,8 +39,14 @@ def sections(location: Location) -> list[Section]:
     return parse_obj_as(list[Section], response.json()["sections"])
 
 
-def restaurant(link: Link) -> Restaurant:
-    response = httpx.get(restaurant_wolt_api_url + link.target)
+def restaurant(item: Item) -> Restaurant:
+    headers = {
+        "app-language": "en",
+    }
+    response = httpx.get(
+        restaurant_wolt_api_url + item.link.target,
+        headers=headers
+    )
 
     if not response.is_success:
         raise WoltApiError()

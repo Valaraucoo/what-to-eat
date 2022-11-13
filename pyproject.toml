@@ -25,3 +25,18 @@ factory-boy = "^3.2.1"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+select = ["E", "F", "Q", "U", "N", "C", "B", "T"]
+ignore = ["T201", "E999", "B008"]
+
+[tool.mypy]
+python_version = "3.11"
+ignore_missing_imports = true
+strict_optional = false
+show_error_codes = true
+
+[tool.mypy-app.cache]
+ignore_errors = true

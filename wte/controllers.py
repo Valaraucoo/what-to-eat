@@ -1,3 +1,5 @@
+import random
+
 import typer
 from rich import print
 from rich.console import Console
@@ -8,6 +10,7 @@ from wte.models.config import Profile
 from wte.models.wolt import Item
 from wte.services import filters
 from wte.services.display import build_items_table, build_restaurant_table
+from wte.services.utils import build_weights
 
 
 def items_controller(
@@ -52,7 +55,23 @@ def restaurant_controller(items: list[Item], restaurant: str) -> None:
         )
         raise typer.Exit()
 
-    restaurant = wolt.restaurant(items[0].link)
+    restaurant = wolt.restaurant(items[0])  # type: ignore[assignment]
+    table = build_restaurant_table(restaurant)  # type: ignore[arg-type]
+
+    console = Console()
+    console.print(table)
+
+
+def random_controller(items: list[Item], tag: str | None,) -> None:
+    if tag:
+        items = filters.filter_by_tag(items, tag)
+
+    if not items:
+        print("[red]No restaurants found")
+        raise typer.Exit(0)
+
+    item = random.choices(population=items, weights=build_weights(items), k=1)[0]
+    restaurant = wolt.restaurant(item)
 
     table = build_restaurant_table(restaurant=restaurant)
 
