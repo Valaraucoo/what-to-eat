@@ -1,6 +1,6 @@
 <h2>🍔 What to eat? 🍕</h2>
 
-![Build Status](https://github.com/Valaraucoo/what-to-eat/actions/workflows/tests.yaml/badge.svg)
+![Build Status](https://github.com/Valaraucoo/what-to-eat/actions/workflows/tests.yml/badge.svg)
 
 <p align="center">
     <em>CLI tool to query Wolt API in your location!</em>
