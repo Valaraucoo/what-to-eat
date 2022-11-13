@@ -17,6 +17,8 @@ Example usage:
 
 <h3>🛠️ Installation</h3>
 
+You can install `what-to-eat` using [pip](https://pypi.org/project/what-to-eat/):
+
 ```console
 pip install what-to-eat
 ```
