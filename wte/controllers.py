@@ -10,7 +10,7 @@ from wte.models.config import Profile
 from wte.models.wolt import Item
 from wte.services import filters
 from wte.services.display import build_items_table, build_restaurant_table
-from wte.services.utils import build_weights
+from wte.services.weights import EvaluateTechnique, build_weights
 
 
 def items_controller(
@@ -62,7 +62,7 @@ def restaurant_controller(items: list[Item], restaurant: str) -> None:
     console.print(table)
 
 
-def random_controller(items: list[Item], tag: str | None,) -> None:
+def random_controller(items: list[Item], tag: str | None, technique: EvaluateTechnique) -> None:
     if tag:
         items = filters.filter_by_tag(items, tag)
 
@@ -70,7 +70,7 @@ def random_controller(items: list[Item], tag: str | None,) -> None:
         print("[red]No restaurants found")
         raise typer.Exit(0)
 
-    item = random.choices(population=items, weights=build_weights(items), k=1)[0]
+    item = random.choices(population=items, weights=build_weights(items, technique), k=1)[0]
     restaurant = wolt.restaurant(item)
 
     table = build_restaurant_table(restaurant=restaurant)

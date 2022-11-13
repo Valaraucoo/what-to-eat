@@ -7,6 +7,7 @@ from wte.services.profile import find_profile
 from wte.models import Ordering, Sort
 from wte import config, controllers, validators
 from wte.gateways import wolt
+from wte.services.weights import EvaluateTechnique
 
 app = typer.Typer(no_args_is_help=True)
 
@@ -58,15 +59,19 @@ def ls(
 def random(
     profile_name: Optional[str] = typer.Option(None, "--profile", "-p", help="Profile name"),    # noqa: U007
     tag: Optional[str] = typer.Option(None, "--tag", "-t", help="Tag"),    # noqa: U007
+    technique: EvaluateTechnique = typer.Option(
+        EvaluateTechnique.MIX,
+        help=f"Technique: {', '.join(EvaluateTechnique.choices())}",
+        case_sensitive=False
+    )
 ) -> None:
     """Finds random restaurant via Wolt API"""
-    # TODO: add more options
     profile = find_profile(profile_name)
     with Progress(SpinnerColumn(), TextColumn("[progress.description]{task.description}"), transient=True) as progress:
         progress.add_task(description="Fetching data...", total=None)
         items = wolt.items(location=profile.location)
 
-    controllers.random_controller(items, tag)
+    controllers.random_controller(items, tag, technique)
 
 
 @app.command()

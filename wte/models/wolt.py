@@ -94,7 +94,7 @@ class Restaurant(HashableModel):
     phone: str
     price_range: int
     public_url: HttpUrl
-    rating: RatingDetail
+    rating: RatingDetail | None
     website: HttpUrl | None
     allowed_payment_methods: list[str]
 
@@ -116,6 +116,8 @@ class Restaurant(HashableModel):
         return self.public_url
 
     def format_rating(self) -> str:
+        if not self.rating:
+            return "-"
         return f"{self.rating.text} ({self.rating.score} / {self.rating.volume} reviews)"
 
     def format_tags(self) -> str:
