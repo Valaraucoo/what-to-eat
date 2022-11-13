@@ -80,5 +80,4 @@ evaluators: dict[EvaluateTechnique, Evaluator] = {
 
 
 def build_weights(items: list[Item], evaluator: EvaluateTechnique = EvaluateTechnique.MIX) -> list[float]:
-    evaluator = evaluators.get(evaluator, by_mix)
-    return [evaluator(item) for item in items]
+    return [evaluators.get(evaluator, by_mix)(item) for item in items]
