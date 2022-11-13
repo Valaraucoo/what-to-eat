@@ -6,7 +6,7 @@ import httpx
 from pydantic import parse_obj_as
 
 from wte.models.location import Location
-from wte.models.wolt import Item, Link, Restaurant, Section
+from wte.models.wolt import Item, Restaurant, Section
 
 consumer_wolt_api_url: Final[str] = "https://consumer-api.wolt.com/v1/pages/front"
 restaurant_wolt_api_url: Final[str] = "https://restaurant-api.wolt.com/v3/venues/"

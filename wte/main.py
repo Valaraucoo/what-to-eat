@@ -60,6 +60,7 @@ def random(
     tag: Optional[str] = typer.Option(None, "--tag", "-t", help="Tag"),    # noqa: U007
 ) -> None:
     """Finds random restaurant via Wolt API"""
+    # TODO: add more options
     profile = find_profile(profile_name)
     with Progress(SpinnerColumn(), TextColumn("[progress.description]{task.description}"), transient=True) as progress:
         progress.add_task(description="Fetching data...", total=None)
