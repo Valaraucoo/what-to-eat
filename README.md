@@ -18,7 +18,7 @@ Example usage:
 <h3>🛠️ Installation</h3>
 
 ```console
-work in progress
+pip install what-to-eat
 ```
 
 <h3>💬 Available commands</h3>
