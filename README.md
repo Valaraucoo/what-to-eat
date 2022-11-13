@@ -3,8 +3,9 @@
     <em>CLI tool to query Wolt API in your location!</em>
 </p>
 
-<img src="./images/ls-query-example.png" alt="demo" width="600"/>
-
+<p align="center">
+    <img src="./images/ls-query-example.png" alt="demo" width="900"/>
+</p>
 
 TODOs
 * write docs and readme
