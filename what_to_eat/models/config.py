@@ -1,5 +1,5 @@
-from wte.models import HashableModel
-from wte.models.location import Location
+from what_to_eat.models import HashableModel
+from what_to_eat.models.location import Location
 
 
 class Profile(HashableModel):

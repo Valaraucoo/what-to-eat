@@ -3,11 +3,11 @@ from typing import Optional
 import typer
 from rich.progress import Progress, SpinnerColumn, TextColumn
 
-from wte.services.profile import find_profile
-from wte.models import Ordering, Sort
-from wte import config, controllers, validators
-from wte.gateways import wolt
-from wte.services.weights import EvaluateTechnique
+from what_to_eat.services.profile import find_profile
+from what_to_eat.models import Ordering, Sort
+from what_to_eat import config, controllers, validators
+from what_to_eat.gateways import wolt
+from what_to_eat.services.weights import EvaluateTechnique
 
 app = typer.Typer(no_args_is_help=True)
 

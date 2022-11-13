@@ -1,6 +1,6 @@
 from pydantic import HttpUrl
 
-from wte.models import HashableModel
+from what_to_eat.models import HashableModel
 
 
 class Rating(HashableModel):

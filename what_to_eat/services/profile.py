@@ -1,8 +1,8 @@
 import typer
 from rich import print
 
-from wte import config
-from wte.models.config import Profile
+from what_to_eat import config
+from what_to_eat.models.config import Profile
 
 
 def default_profile() -> Profile | None:

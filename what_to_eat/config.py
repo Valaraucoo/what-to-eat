@@ -7,9 +7,9 @@ import typer
 from rich import print
 from pydantic import ValidationError
 
-from wte.gateways import location
-from wte.models.config import Config, Profile
-from wte.models.location import Location
+from what_to_eat.gateways import location
+from what_to_eat.models.config import Config, Profile
+from what_to_eat.models.location import Location
 
 default_config_path: Final[str] = ".what-to-eat-config.json"
 config_file: Final[Path] = Path(default_config_path)

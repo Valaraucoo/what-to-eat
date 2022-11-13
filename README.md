@@ -4,7 +4,7 @@
 </p>
 
 ---
-Why to use *wte*? How many times have you not known what to order for dinner or lunch? *What-to-eat* will help you querying and filtering restaurants available in your location via [Wolt](https://wolt.com/pl/discovery) app! 🍔
+Why to use *what-to-eat*? How many times have you not known what to order for dinner or lunch? *What-to-eat* will help you querying and filtering restaurants available in your location via [Wolt](https://wolt.com/pl/discovery) app! 🍔
 
 Example usage:
 
@@ -23,9 +23,9 @@ work in progress
 There are currently 3 commands available, one of which is used to configure the tool: `configure`, `ls`, `random`:
 
 ```console
-$ wte --help
+$ what-to-eat --help
 
- Usage: wte [OPTIONS] COMMAND [ARGS]...
+ Usage: what-to-eat [OPTIONS] COMMAND [ARGS]...
 
 ╭─ Options ────────────────────────────────────────────────────────────────────╮
 │ --install-completion          Install completion for the current shell.      │
@@ -48,20 +48,20 @@ You can find examples of using these commands in the section below.
 Configure your tool:
 
 ```console
-$ wte configure
+$ what-to-eat configure
 ```
 
 
 List all available restaurants in your localization:
 
 ```console
-$ wte ls
+$ what-to-eat ls
 ```
 
 
 Sort restaurants by `rating` and limit results to 5 records:
 ```console
-$ wte ls --sort rating --ordering desc --limit 5
+$ what-to-eat ls --sort rating --ordering desc --limit 5
 ┏━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┓
 ┃ No. ┃                               Restaurant ┃                  Address ┃ Estimate time ┃ Delivery cost ┃ Rating ┃ Price ┃                Tags ┃
 ┡━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━┩
@@ -78,13 +78,13 @@ $ wte ls --sort rating --ordering desc --limit 5
 By default your first profile is `default` one. But while listing restaurants you can change it using `profile` option:
 
 ```console
-$ wte ls --profile work
+$ what-to-eat ls --profile work
 ```
 
 You can also display restaurant details:
 
 ```console
-$ wte ls 'KruKam Kraków'
+$ what-to-eat ls 'KruKam Kraków'
 ┏━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ┃ 🍕 KruKam Kraków ┃                       Kraków, ul. Krakowska 35A 🍕 ┃
 ┡━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
@@ -99,7 +99,7 @@ $ wte ls 'KruKam Kraków'
 
 However, perhaps the coolest options is to randomly select restaurants.
 ```console
-$ wte random
+$ what-to-eat random
 ```
 
 **Note:** The selection algorithm is based on the ranking and delivery time for a given restaurant.
@@ -107,7 +107,7 @@ $ wte random
 You can also enter a tag based on which a restaurant will be randomly selected:
 
 ```console
-$ wte random --tag pizza
+$ what-to-eat random --tag pizza
 ```
 
 

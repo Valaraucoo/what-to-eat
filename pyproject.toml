@@ -1,12 +1,12 @@
 [tool.poetry]
-name = "wte"
-version = "0.1.0"
-description = ""
+name = "what-to-eat"
+version = "0.1.1"
+description = "What to eat? CLI tool to interaction with Wolt API"
 authors = ["Kamil Woźniak <jestem.kamil.wozniak@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.scripts]
-wte = "wte.main:app"
+what-to-eat = "what_to_eat.main:app"
 
 [tool.poetry.dependencies]
 python = "^3.10"
@@ -15,6 +15,10 @@ pydantic = "^1.10.2"
 httpx = "^0.23.0"
 inquirer = "^2.10.1"
 
+[tool.poetry.urls]
+homepage = "https://github.com/Valaraucoo/what-to-eat"
+repository = "https://github.com/Valaraucoo/what-to-eat"
+documentation = "https://github.com/Valaraucoo/what-to-eat"
 
 [tool.poetry.group.dev.dependencies]
 ruff = "^0.0.114"

@@ -20,7 +20,7 @@ jobs:
           pip install ruff
 
       - name: Run ruff linter
-        run: ruff wte
+        run: ruff what_to_eat
 
   mypy:
     name: Run mypy
@@ -38,7 +38,7 @@ jobs:
           pip install mypy
 
       - name: Run mypy
-        run: mypy wte
+        run: mypy what_to_eat
 
   test:
     name: Run tests

@@ -1,6 +1,6 @@
 from typer.testing import CliRunner
 
-from wte.main import app
+from what_to_eat.main import app
 
 runner = CliRunner()
 

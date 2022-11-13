@@ -1,7 +1,7 @@
 import httpx
 import urllib.parse
 
-from wte.models.location import Location
+from what_to_eat.models.location import Location
 
 
 class LocationError(Exception):

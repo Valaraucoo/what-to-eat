@@ -1,8 +1,8 @@
 from factory import Factory
 
-from wte.models.config import Config, Profile
-from wte.models.location import Location
-from wte.models.wolt import Item, Link, Rating, Venue
+from what_to_eat.models.config import Config, Profile
+from what_to_eat.models.location import Location
+from what_to_eat.models.wolt import Item, Link, Rating, Venue
 
 
 class ConfigFactory(Factory):

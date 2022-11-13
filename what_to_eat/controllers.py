@@ -4,13 +4,13 @@ import typer
 from rich import print
 from rich.console import Console
 
-from wte.gateways import wolt
-from wte.models import Ordering, Sort
-from wte.models.config import Profile
-from wte.models.wolt import Item
-from wte.services import filters
-from wte.services.display import build_items_table, build_restaurant_table
-from wte.services.weights import EvaluateTechnique, build_weights
+from what_to_eat.gateways import wolt
+from what_to_eat.models import Ordering, Sort
+from what_to_eat.models.config import Profile
+from what_to_eat.models.wolt import Item
+from what_to_eat.services import filters
+from what_to_eat.services.display import build_items_table, build_restaurant_table
+from what_to_eat.services.weights import EvaluateTechnique, build_weights
 
 
 def items_controller(

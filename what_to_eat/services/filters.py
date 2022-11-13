@@ -1,5 +1,5 @@
-from wte.models import Ordering, Sort
-from wte.models.wolt import Item
+from what_to_eat.models import Ordering, Sort
+from what_to_eat.models.wolt import Item
 
 
 def filter_by_name(items: list[Item], name: str) -> list[Item]:

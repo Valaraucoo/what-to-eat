@@ -1,7 +1,7 @@
 from enum import Enum
 from typing import Callable, Final, TypeAlias
 
-from wte.models.wolt import Item
+from what_to_eat.models.wolt import Item
 
 Evaluator: TypeAlias = Callable[[Item], float]
 

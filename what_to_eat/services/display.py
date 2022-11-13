@@ -1,6 +1,6 @@
 from rich.table import Table
 
-from wte.models.wolt import Item, Restaurant
+from what_to_eat.models.wolt import Item, Restaurant
 
 
 def build_items_table(items: list[Item]) -> Table:
