@@ -6,7 +6,8 @@ on:
       - master
 
 jobs:
-  - name: Release
+  release:
+    name: Release
     if: github.event_name == 'push' && github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     steps:
