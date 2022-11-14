@@ -2,8 +2,21 @@ name: Tests
 
 on:
   push:
+  pull_request:
 
 jobs:
+  check-version:
+    name: Check what-to-eat version
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Check version
+        uses: ./.github/actions/check-version
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
   ruff:
     name: Run ruff linter
     runs-on: ubuntu-latest

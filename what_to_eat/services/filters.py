@@ -2,7 +2,7 @@ from what_to_eat.models import Ordering, Sort
 from what_to_eat.models.wolt import Item
 
 
-def filter_by_name(items: list[Item], name: str) -> list[Item]:
+def filter_by_title(items: list[Item], name: str) -> list[Item]:
     name = name.lower().strip()
     return list(filter(lambda i: name in i.title.lower(), items))
 
