@@ -48,7 +48,7 @@ def get_master_version() -> str:
 
 def should_compare_versions() -> bool:
     print(f"Comparing versions for {settings.github_ref} and {settings.github_base_ref}")
-    return settings.github_base_ref == "refs/heads/master"
+    return settings.github_base_ref == "master"
 
 
 def compare_versions(new: str, old: str) -> bool:
