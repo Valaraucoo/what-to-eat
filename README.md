@@ -1,6 +1,8 @@
 <h2>🍔 What to eat? 🍕</h2>
 
 ![Build Status](https://github.com/Valaraucoo/what-to-eat/actions/workflows/tests.yml/badge.svg)
+[![PyPI](https://img.shields.io/pypi/v/what-to-eat.svg)](https://pypi.python.org/pypi/what-to-eat/)
+
 
 <p align="center">
     <em>CLI tool to query Wolt API in your location!</em>
