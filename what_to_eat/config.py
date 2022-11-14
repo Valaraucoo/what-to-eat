@@ -10,9 +10,10 @@ from pydantic import ValidationError
 from what_to_eat.gateways import location
 from what_to_eat.models.config import Config, Profile
 from what_to_eat.models.location import Location
+from what_to_eat.prompt import confirm_overwrite, get_address, get_profile_name
 
-default_config_path: Final[str] = ".what-to-eat-config.json"
-config_file: Final[Path] = Path(default_config_path)
+default_config_dir: Final[Path] = Path.home() / ".what-to-eat"
+config_file: Final[Path] = default_config_dir / ".what-to-eat-config.json"
 
 
 @lru_cache
@@ -66,10 +67,10 @@ def manage() -> None:
 
 def _create() -> Config:
     if config_file.is_file():
-        _confirm_overwrite()
+        confirm_overwrite()
 
-    profile_name = _get_profile_name()
-    address = _get_address()
+    profile_name = get_profile_name()
+    address = get_address()
     detailed_location = _get_detailed_location(address)
 
     config = Config(
@@ -77,6 +78,9 @@ def _create() -> Config:
             Profile(name=profile_name, is_default=True, address=address, location=detailed_location)
         ]
     )
+
+    if not default_config_dir.is_dir():
+        default_config_dir.mkdir()
 
     config_file.write_bytes(config.json().encode())
 
@@ -87,12 +91,12 @@ def _create() -> Config:
 def _add() -> Config:
     config = load()
 
-    profile_name = _get_profile_name()
+    profile_name = get_profile_name()
     if profile_name in (p.name for p in config.profiles):
         print("[red]💥 Profile with this name already exists")
         raise typer.Exit(1)
 
-    address = _get_address()
+    address = get_address()
     detailed_location = _get_detailed_location(address)
 
     config.profiles.append(
@@ -115,8 +119,8 @@ def _edit() -> Config:
 
     profile = next(filter(lambda p: p.name == profile, config.profiles))
 
-    profile.name = _get_profile_name(profile.name)
-    profile.address = _get_address(profile.address)
+    profile.name = get_profile_name(profile.name)
+    profile.address = get_address(profile.address)
     profile.location = _get_detailed_location(profile.address)
 
     config_file.write_bytes(config.json().encode())
@@ -162,19 +166,6 @@ def _remove() -> Config:
 
     print("[green]🏁 Profile was updated successfully!")
     return config
-
-
-def _confirm_overwrite() -> None:
-    if not inquirer.confirm("Config file already exists, overwrite?"):
-        raise typer.Exit(0)
-
-
-def _get_profile_name(default: str = "Default") -> str:
-    return inquirer.text("Profile name", default=default)
-
-
-def _get_address(default: str = "Kraków") -> str:
-    return inquirer.text("Your address", default=default)
 
 
 def _get_detailed_location(address: str) -> Location:

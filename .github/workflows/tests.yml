@@ -4,6 +4,17 @@ on:
   push:
 
 jobs:
+  check_version:
+    name: Check what-to-eat version
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Check version
+        uses: ./.github/actions/check-versions
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
   ruff:
     name: Run ruff linter
     runs-on: ubuntu-latest
