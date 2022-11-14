@@ -37,7 +37,9 @@ def get_what_to_eat_version() -> str:
 
 
 def get_master_version() -> str:
-    response = httpx.get(f"https://raw.githubusercontent.com/{settings.github_repository}/master/pyproject.toml")
+    response = httpx.get(
+        f"https://raw.githubusercontent.com/{settings.github_repository}/master/pyproject.toml"
+    )
     response.raise_for_status()
     content = response.text
     match = re.search(version_regex, content)
