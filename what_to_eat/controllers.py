@@ -8,6 +8,7 @@ from what_to_eat.gateways import wolt
 from what_to_eat.models import Ordering, Sort
 from what_to_eat.models.config import Profile
 from what_to_eat.models.wolt import Item
+from what_to_eat.prompt import select_restaurant
 from what_to_eat.services import filters
 from what_to_eat.services.display import build_items_table, build_restaurant_table
 from what_to_eat.services.weights import EvaluateTechnique, build_weights
@@ -43,19 +44,17 @@ def items_controller(
 
 
 def restaurant_controller(items: list[Item], restaurant: str) -> None:
-    items = filters.filter_by_name(items, restaurant)
+    items = filters.filter_by_title(items, restaurant)
 
-    if len(items) == 0:
+    if not items:
         print(f"[red]Restaurant [cyan italic]{restaurant}[/][red] not found[/red]")
         raise typer.Exit()
-    if len(items) > 1:
-        print(
-            f"[red]More than one restaurant found for [cyan italic]{restaurant}[/][red]. "
-            f"Try to specify one restaurant[/red]"
-        )
-        raise typer.Exit()
 
-    restaurant = wolt.restaurant(items[0])  # type: ignore[assignment]
+    if len(items) > 1:
+        restaurant = select_restaurant(items)  # type: ignore[assignment]
+    else:
+        restaurant = wolt.restaurant(items[0])  # type: ignore[assignment]
+
     table = build_restaurant_table(restaurant)  # type: ignore[arg-type]
 
     console = Console()
