@@ -47,11 +47,10 @@ def get_master_version() -> str:
 
 
 def should_compare_versions() -> bool:
-    print(f"Comparing versions for {settings.github_ref} and {settings.github_base_ref}")
     return settings.github_base_ref == "master"
 
 
-def compare_versions(new: str, old: str) -> bool:
+def is_updated(old: str, new: str) -> bool:
     new = new.split(".")
     old = old.split(".")
     for i in range(3):
@@ -68,7 +67,7 @@ if __name__ == "__main__":
 
     if should_compare_versions():
         master_version = get_master_version()
-        if compare_versions(pyproject_toml_version, master_version):
+        if not is_updated(pyproject_toml_version, master_version):
             raise ValueError(
                 f"Version in pyproject.toml ({pyproject_toml_version}) "
                 f"must be greater than version in master ({master_version})"
