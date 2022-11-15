@@ -1,9 +1,13 @@
 from importlib import metadata
+from importlib.metadata import PackageNotFoundError
 
 import typer
 from rich import print
 
-__version__ = metadata.version(__package__)
+try:
+    __version__ = metadata.version(__package__)
+except PackageNotFoundError:
+    __version__ = "unknown"
 
 
 def version_callback(value: bool):
