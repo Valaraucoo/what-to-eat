@@ -18,20 +18,18 @@ class WoltApiError(Exception):
 
 
 def sections(location: Location) -> list[Section]:
-    params = urllib.parse.urlencode({
-        "lat": location.lat,
-        "lon": location.lon,
-    })
+    params = urllib.parse.urlencode(
+        {
+            "lat": location.lat,
+            "lon": location.lon,
+        }
+    )
 
     # TODO: add language to config
     headers = {
         "app-language": "en",
     }
-    response = httpx.get(
-        consumer_wolt_api_url,
-        params=params,
-        headers=headers
-    )
+    response = httpx.get(consumer_wolt_api_url, params=params, headers=headers)
 
     if not response.is_success:
         raise WoltApiError()
@@ -43,18 +41,20 @@ def restaurant(item: Item) -> Restaurant:
     headers = {
         "app-language": "en",
     }
-    response = httpx.get(
-        restaurant_wolt_api_url + item.link.target,
-        headers=headers
-    )
+    response = httpx.get(restaurant_wolt_api_url + item.link.target, headers=headers)
 
     if not response.is_success:
         raise WoltApiError()
-
     return parse_obj_as(Restaurant, response.json()["results"][0])
 
 
 def items(location: Location) -> list[Item]:
     return list(
-        {i for i in itertools.chain.from_iterable(s.items for s in sections(location)) if i.venue}
+        {
+            item
+            for item in itertools.chain.from_iterable(
+                s.items for s in sections(location)
+            )
+            if item.venue
+        }
     )
