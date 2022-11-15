@@ -1,3 +1,2 @@
 httpx==0.23.0
 pydantic==1.10.2
-pygithub==1.57

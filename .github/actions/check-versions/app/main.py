@@ -15,7 +15,6 @@ class Settings(BaseSettings):
 
 settings: Final[Settings] = Settings()
 pyproject_toml: Final[Path] = Path("./pyproject.toml")
-what_to_eat_version_file: Final[Path] = Path("./what_to_eat/__init__.py")
 
 version_regex: Final[str] = r"\"(?P<version>[0-9]+\.[0-9]+\.[0-9]+)\""
 
@@ -36,7 +35,9 @@ def get_master_version() -> str:
     content = response.text
     match = re.search(version_regex, content)
     if match is None:
-        raise ValueError("[master] Could not find version in pyproject.toml")
+        raise ValueError(
+            f"[{settings.github_ref}] Could not find version in what_to_eat/__init__.py"
+        )
     return match.group("version")
 
 
