@@ -53,7 +53,7 @@ jobs:
 
   pre-commit:
     name: Run pre-commit
-    runs-on: [ self-hosted, utils ]
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
