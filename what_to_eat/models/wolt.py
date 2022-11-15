@@ -1,3 +1,7 @@
+import datetime
+from enum import Enum
+from typing import TypeAlias
+
 from pydantic import HttpUrl
 
 from what_to_eat.models import HashableModel
@@ -83,20 +87,84 @@ class Translation(HashableModel):
     value: str
 
 
+Weekday: TypeAlias = str
+
+
+class TimesType(str, Enum):
+    OPEN = "open"
+    CLOSE = "close"
+
+
+class Times(HashableModel):
+    type: str
+    value: dict[str, int]
+
+    def format(self) -> str:
+        if not (value := self.value.get("$date")):
+            return "-"
+        return datetime.datetime.fromtimestamp(value / 1000).strftime("%H:%M")
+
+
+class Statistics(HashableModel):
+    mean: int | None
+    max: int | None
+    min: int | None
+
+
+class Estimates(HashableModel):
+    delivery: Statistics
+    pickup: Statistics
+    preparation: Statistics
+    total: Statistics
+
+    def format(self) -> str:
+        if not self.total.mean:
+            return "-"
+        return f"{self.total.mean} minutes"
+
+
 class Restaurant(HashableModel):
-    # TODO: add description, estimates, delivery specs, opening hours
     name: list[Translation]
     address: str
     city: str
     country: str
     currency: str
     food_tags: list[str]
-    phone: str
+    phone: str | None
     price_range: int
     public_url: HttpUrl
     rating: RatingDetail | None
     website: HttpUrl | None
     allowed_payment_methods: list[str]
+    description: list[Translation]
+    estimates: Estimates | None
+    opening_times: dict[Weekday, list[Times]] = {}
+
+    def format_estimates(self) -> str:
+        if not self.estimates:
+            return "-"
+        return self.estimates.format()
+
+    def format_description(self) -> str:
+        if not self.description:
+            return "-"
+        description = self.description[0].value
+        if len(description) > 30:
+            description = description[:60] + "..."
+        return description
+
+    def format_opening_time(self) -> str:
+        weekday = datetime.datetime.now().strftime("%A").lower()
+        opening_times = self.opening_times.get(weekday)
+        if not opening_times:
+            return "-"
+
+        open_time = next(time for time in opening_times if time.type == TimesType.OPEN)
+        close_time = next(
+            time for time in opening_times if time.type == TimesType.CLOSE
+        )
+
+        return f"{open_time.format()} - {close_time.format()}"
 
     def format_name(self) -> str:
         return f":pizza: [u]{self.name[0].value}[/u]"

@@ -45,15 +45,16 @@ def restaurant(item: Item) -> Restaurant:
 
     if not response.is_success:
         raise WoltApiError()
-
     return parse_obj_as(Restaurant, response.json()["results"][0])
 
 
 def items(location: Location) -> list[Item]:
     return list(
         {
-            i
-            for i in itertools.chain.from_iterable(s.items for s in sections(location))
-            if i.venue
+            item
+            for item in itertools.chain.from_iterable(
+                s.items for s in sections(location)
+            )
+            if item.venue
         }
     )
