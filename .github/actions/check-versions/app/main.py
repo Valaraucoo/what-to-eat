@@ -61,7 +61,7 @@ if __name__ == "__main__":
         pyproject_toml_version = get_pyproject_toml_version()
         master_version = get_master_version()
 
-        if not is_updated(pyproject_toml_version, master_version):
+        if not is_updated(master_version, pyproject_toml_version):
             raise ValueError(
                 f"Version in pyproject.toml ({pyproject_toml_version}) "
                 f"must be greater than version in master ({master_version})"
