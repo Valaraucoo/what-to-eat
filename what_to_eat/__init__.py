@@ -1,12 +1,12 @@
-from typing import Final
+from importlib import metadata
 from rich import print
 
 import typer
 
-VERSION: Final[str] = "0.1.2"
+__version__ = metadata.version(__package__)
 
 
 def version_callback(value: bool):
     if value:
-        print(VERSION)
+        print(__version__)
         raise typer.Exit()
