@@ -1,7 +1,7 @@
 from importlib import metadata
-from rich import print
 
 import typer
+from rich import print
 
 __version__ = metadata.version(__package__)
 

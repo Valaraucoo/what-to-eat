@@ -4,8 +4,8 @@ from typing import Final
 
 import inquirer
 import typer
-from rich import print
 from pydantic import ValidationError
+from rich import print
 
 from what_to_eat.gateways import location
 from what_to_eat.models.config import Config, Profile
@@ -19,7 +19,9 @@ config_file: Final[Path] = default_config_dir / ".what-to-eat-config.json"
 @lru_cache
 def load() -> Config:
     if not config_file.is_file():
-        print("[red]💥 Config file not found, run [italic]what-to-eat configure[/italic] first")
+        print(
+            "[red]💥 Config file not found, run [italic]what-to-eat configure[/italic] first"
+        )
         raise typer.Exit(1)
 
     try:
@@ -42,7 +44,7 @@ def manage() -> None:
                 "List profiles",
                 "Edit profile",
                 "Set profile as default",
-                "Remove profile"
+                "Remove profile",
             ],
         ),
     ]
@@ -75,7 +77,12 @@ def _create() -> Config:
 
     config = Config(
         profiles=[
-            Profile(name=profile_name, is_default=True, address=address, location=detailed_location)
+            Profile(
+                name=profile_name,
+                is_default=True,
+                address=address,
+                location=detailed_location,
+            )
         ]
     )
 
