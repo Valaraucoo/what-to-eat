@@ -12,7 +12,9 @@ def filter_by_tag(items: list[Item], tag: str) -> list[Item]:
     return list(filter(lambda i: i.venue and tag in i.venue.tags, items))
 
 
-def sort_by(items: list[Item], sort: Sort = Sort.NONE, ordering: Ordering = Ordering.ASC) -> list[Item]:
+def sort_by(
+    items: list[Item], sort: Sort = Sort.NONE, ordering: Ordering = Ordering.ASC
+) -> list[Item]:
     reverse = ordering == Ordering.DESC.value
     match sort:
         case Sort.RESTAURANT:
@@ -22,15 +24,26 @@ def sort_by(items: list[Item], sort: Sort = Sort.NONE, ordering: Ordering = Orde
         case Sort.DELIVERY_COST:
             return sorted(items, key=lambda i: i.venue.estimate_range, reverse=reverse)
         case Sort.ESTIMATE_TIME:
-            return sorted(items, key=lambda i: i.venue.delivery_price_int, reverse=reverse)
+            return sorted(
+                items, key=lambda i: i.venue.delivery_price_int, reverse=reverse
+            )
         case Sort.PRICE:
             return sorted(items, key=lambda i: i.venue.price_range, reverse=reverse)
         case Sort.RATING:
-            items_without_rating = list(filter(lambda i: i.venue and not i.venue.rating, items))
-            items_with_rating = list(filter(lambda i: i.venue and i.venue.rating, items))
-            return sorted(
-                items_with_rating, key=lambda i: i.venue.rating.score, reverse=reverse
-            ) + items_without_rating
+            items_without_rating = list(
+                filter(lambda i: i.venue and not i.venue.rating, items)
+            )
+            items_with_rating = list(
+                filter(lambda i: i.venue and i.venue.rating, items)
+            )
+            return (
+                sorted(
+                    items_with_rating,
+                    key=lambda i: i.venue.rating.score,
+                    reverse=reverse,
+                )
+                + items_without_rating
+            )
         case _:
             return items
 
@@ -39,7 +52,11 @@ def filter_by_query(items: list[Item], query: str) -> list[Item]:
     # TODO: refactor and optimize
     def _show_query(s: str) -> str:
         pos = s.lower().index(query)
-        return s[:pos] + f"[u][yellow]{s[pos:pos + len(query)]}[/yellow][/u]" + s[pos + len(query):]
+        return (
+            s[:pos]
+            + f"[u][yellow]{s[pos:pos + len(query)]}[/yellow][/u]"
+            + s[pos + len(query) :]
+        )
 
     query = query.lower().strip()
     results = []

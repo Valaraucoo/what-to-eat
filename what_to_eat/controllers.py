@@ -61,7 +61,9 @@ def restaurant_controller(items: list[Item], restaurant: str) -> None:
     console.print(table)
 
 
-def random_controller(items: list[Item], tag: str | None, technique: EvaluateTechnique) -> None:
+def random_controller(
+    items: list[Item], tag: str | None, technique: EvaluateTechnique
+) -> None:
     if tag:
         items = filters.filter_by_tag(items, tag)
 
@@ -69,7 +71,9 @@ def random_controller(items: list[Item], tag: str | None, technique: EvaluateTec
         print("[red]No restaurants found")
         raise typer.Exit(0)
 
-    item = random.choices(population=items, weights=build_weights(items, technique), k=1)[0]
+    item = random.choices(
+        population=items, weights=build_weights(items, technique), k=1
+    )[0]
     restaurant = wolt.restaurant(item)
 
     table = build_restaurant_table(restaurant=restaurant)

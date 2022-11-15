@@ -9,7 +9,14 @@ class ConfigFactory(Factory):
     class Meta:
         model = Config
 
-    profiles = [Profile(name="default", address="Test address", location=Location(lat=0.0, lon=0.0), is_default=True)]
+    profiles = [
+        Profile(
+            name="default",
+            address="Test address",
+            location=Location(lat=0.0, lon=0.0),
+            is_default=True,
+        )
+    ]
 
 
 class ProfileFactory(Factory):

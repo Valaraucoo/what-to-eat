@@ -1,12 +1,16 @@
-from typing import Final
-from rich import print
+from importlib import metadata
+from importlib.metadata import PackageNotFoundError
 
 import typer
+from rich import print
 
-VERSION: Final[str] = "0.1.2"
+try:
+    __version__ = metadata.version(__package__)
+except PackageNotFoundError:
+    __version__ = "unknown"
 
 
 def version_callback(value: bool):
     if value:
-        print(VERSION)
+        print(__version__)
         raise typer.Exit()

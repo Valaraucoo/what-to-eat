@@ -16,9 +16,15 @@ def select_restaurant(items: list[Item]) -> Restaurant:
     ]
     answer = inquirer.prompt(questions)
 
-    with Progress(SpinnerColumn(), TextColumn("[progress.description]{task.description}"), transient=True) as progress:
+    with Progress(
+        SpinnerColumn(),
+        TextColumn("[progress.description]{task.description}"),
+        transient=True,
+    ) as progress:
         progress.add_task(description="Loading...", total=None)
-        return wolt.restaurant(next(item for item in items if item.title == answer["restaurant"]))
+        return wolt.restaurant(
+            next(item for item in items if item.title == answer["restaurant"])
+        )
 
 
 def confirm_overwrite() -> None:

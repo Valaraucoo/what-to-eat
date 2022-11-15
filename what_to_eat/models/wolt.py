@@ -118,10 +118,14 @@ class Restaurant(HashableModel):
     def format_rating(self) -> str:
         if not self.rating:
             return "-"
-        return f"{self.rating.text} ({self.rating.score} / {self.rating.volume} reviews)"
+        return (
+            f"{self.rating.text} ({self.rating.score} / {self.rating.volume} reviews)"
+        )
 
     def format_tags(self) -> str:
-        return ", ".join(f"[black on yellow]{tag.capitalize()}[/]" for tag in self.food_tags)
+        return ", ".join(
+            f"[black on yellow]{tag.capitalize()}[/]" for tag in self.food_tags
+        )
 
     def format_allowed_payment_methods(self) -> str:
         return ", ".join(map(str.capitalize, self.allowed_payment_methods))

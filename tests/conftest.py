@@ -15,7 +15,5 @@ def mock_find_profile() -> None:
 @pytest.fixture
 def mock_wolt_items() -> None:
     with mock.patch("what_to_eat.gateways.wolt.items") as mocked_wolt_items:
-        mocked_wolt_items.return_value = [
-            ItemFactory.create() for _ in range(10)
-        ]
+        mocked_wolt_items.return_value = [ItemFactory.create() for _ in range(10)]
         yield mocked_wolt_items
