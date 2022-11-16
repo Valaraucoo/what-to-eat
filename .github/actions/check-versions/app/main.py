@@ -28,16 +28,12 @@ def get_pyproject_toml_version() -> str:
 
 
 def get_master_version() -> str:
-    response = httpx.get(
-        f"https://raw.githubusercontent.com/{settings.github_repository}/master/pyproject.toml"
-    )
+    response = httpx.get(f"https://raw.githubusercontent.com/{settings.github_repository}/master/pyproject.toml")
     response.raise_for_status()
     content = response.text
     match = re.search(version_regex, content)
     if match is None:
-        raise ValueError(
-            f"[{settings.github_ref}] Could not find version in what_to_eat/__init__.py"
-        )
+        raise ValueError(f"[{settings.github_ref}] Could not find version in what_to_eat/__init__.py")
     return match.group("version")
 
 

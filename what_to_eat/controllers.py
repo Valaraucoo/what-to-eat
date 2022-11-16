@@ -8,10 +8,10 @@ from what_to_eat.gateways import wolt
 from what_to_eat.models import Ordering, Sort
 from what_to_eat.models.config import Profile
 from what_to_eat.models.wolt import Item
-from what_to_eat.prompt import select_restaurant
 from what_to_eat.services import filters
 from what_to_eat.services.display import build_items_table, build_restaurant_table
 from what_to_eat.services.weights import EvaluateTechnique, build_weights
+from what_to_eat.utils.prompt import select_restaurant
 
 
 def items_controller(
@@ -61,9 +61,7 @@ def restaurant_controller(items: list[Item], restaurant: str) -> None:
     console.print(table)
 
 
-def random_controller(
-    items: list[Item], tag: str | None, technique: EvaluateTechnique
-) -> None:
+def random_controller(items: list[Item], tag: str | None, technique: EvaluateTechnique) -> None:
     if tag:
         items = filters.filter_by_tag(items, tag)
 
@@ -71,9 +69,7 @@ def random_controller(
         print("[red]No restaurants found")
         raise typer.Exit(0)
 
-    item = random.choices(
-        population=items, weights=build_weights(items, technique), k=1
-    )[0]
+    item = random.choices(population=items, weights=build_weights(items, technique), k=1)[0]
     restaurant = wolt.restaurant(item)
 
     table = build_restaurant_table(restaurant=restaurant)
