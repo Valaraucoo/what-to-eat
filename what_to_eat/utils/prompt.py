@@ -6,6 +6,28 @@ from what_to_eat.gateways import wolt
 from what_to_eat.models.wolt import Item, Restaurant
 
 
+def select_action() -> str:
+    questions = [
+        inquirer.List(
+            "action",
+            message="What do you want to do?",
+            choices=[
+                "Create new configuration",
+                "Add profile",
+                "List profiles",
+                "Edit profile",
+                "Set profile as default",
+                "Remove profile",
+            ],
+        ),
+    ]
+
+    answers = inquirer.prompt(questions) or dict()
+    action = answers.get("action")
+
+    return action
+
+
 def select_restaurant(items: list[Item]) -> Restaurant:
     questions = [
         inquirer.List(
@@ -14,7 +36,8 @@ def select_restaurant(items: list[Item]) -> Restaurant:
             choices=[item.title for item in items],
         ),
     ]
-    answer = inquirer.prompt(questions)
+    answers = inquirer.prompt(questions) or dict()
+    answer = answers.get("restaurant")
 
     with Progress(
         SpinnerColumn(),
@@ -22,9 +45,7 @@ def select_restaurant(items: list[Item]) -> Restaurant:
         transient=True,
     ) as progress:
         progress.add_task(description="Loading...", total=None)
-        return wolt.restaurant(
-            next(item for item in items if item.title == answer["restaurant"])
-        )
+        return wolt.restaurant(next(item for item in items if item.title == answer))
 
 
 def confirm_overwrite() -> None:

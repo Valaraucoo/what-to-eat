@@ -16,8 +16,6 @@ def validate_restaurant(ctx: typer.Context, restaurant: str | None) -> str | Non
         return restaurant
 
     if any(ctx.params):
-        raise typer.BadParameter(
-            "You can't use any other option with RESTAURANT argument"
-        )
+        raise typer.BadParameter("You can't use any other option with RESTAURANT argument")
 
     return restaurant

@@ -49,12 +49,4 @@ def restaurant(item: Item) -> Restaurant:
 
 
 def items(location: Location) -> list[Item]:
-    return list(
-        {
-            item
-            for item in itertools.chain.from_iterable(
-                s.items for s in sections(location)
-            )
-            if item.venue
-        }
-    )
+    return list({item for item in itertools.chain.from_iterable(s.items for s in sections(location)) if item.venue})

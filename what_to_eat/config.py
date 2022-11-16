@@ -10,7 +10,7 @@ from rich import print
 from what_to_eat.gateways import location
 from what_to_eat.models.config import Config, Profile
 from what_to_eat.models.location import Location
-from what_to_eat.prompt import confirm_overwrite, get_address, get_profile_name
+from what_to_eat.utils.prompt import confirm_overwrite, get_address, get_profile_name, select_action
 
 default_config_dir: Final[Path] = Path.home() / ".what-to-eat"
 config_file: Final[Path] = default_config_dir / ".what-to-eat-config.json"
@@ -19,11 +19,8 @@ config_file: Final[Path] = default_config_dir / ".what-to-eat-config.json"
 @lru_cache
 def load() -> Config:
     if not config_file.is_file():
-        print(
-            "[red]💥 Config file not found, run [italic]what-to-eat configure[/italic] first"
-        )
+        print("[red]💥 Config file not found, run [italic]what-to-eat configure[/italic] first")
         raise typer.Exit(1)
-
     try:
         config = Config.parse_raw(config_file.read_text())
     except ValidationError as e:
@@ -34,25 +31,7 @@ def load() -> Config:
 
 
 def manage() -> None:
-    questions = [
-        inquirer.List(
-            "action",
-            message="What do you want to do?",
-            choices=[
-                "Create new configuration",
-                "Add profile",
-                "List profiles",
-                "Edit profile",
-                "Set profile as default",
-                "Remove profile",
-            ],
-        ),
-    ]
-
-    answers = inquirer.prompt(questions)
-    action = answers["action"]
-
-    match action:
+    match select_action():
         case "Create new configuration":
             _create()
         case "Add profile":
@@ -106,9 +85,7 @@ def _add() -> Config:
     address = get_address()
     detailed_location = _get_detailed_location(address)
 
-    config.profiles.append(
-        Profile(name=profile_name, address=address, location=detailed_location)
-    )
+    config.profiles.append(Profile(name=profile_name, address=address, location=detailed_location))
 
     config_file.write_bytes(config.json().encode())
 
