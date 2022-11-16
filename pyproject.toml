@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "what-to-eat"
-version = "0.1.3"
+version = "0.1.4"
 description = "What to eat? CLI tool to interaction with Wolt API"
 authors = ["Kamil Woźniak <jestem.kamil.wozniak@gmail.com>"]
 readme = "README.md"
@@ -54,3 +54,7 @@ use_parentheses = true
 ensure_newline_before_comments = true
 line_length = 120
 profile = "black"
+
+[tool.black]
+line-length = 120
+target-version = ["py311"]
