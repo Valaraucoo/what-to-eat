@@ -7,4 +7,4 @@ runner = CliRunner()
 
 def test_ls_without_config() -> None:
     result = runner.invoke(app, ["--version"])
-    assert result.output == "0.1.3\n"
+    assert result.output == "1.0.0\n"
