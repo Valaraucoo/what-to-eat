@@ -7,17 +7,19 @@ from rich import print
 T = TypeVar("T")
 
 
-def exception(ex: type[Exception], exit_code: int = 1) -> Callable[..., T]:
+def exception(expected_exception: type[Exception], exit_code: int = 1) -> Callable[..., T]:
     def decorator(func: Callable[..., T]):
         @wraps(func)
         def wrapper(*args, **kwargs) -> T:
             try:
                 return func(*args, **kwargs)
-            except ex as e:
+            except expected_exception as e:
                 print(f"[red u]{e}[/]")
-                raise typer.Exit(code=exit_code)
-            except Exception:
+            except Exception as e:
+                if isinstance(e, typer.Exit):
+                    raise e
                 print("[red u]💥 Unexpected error[/]")
+            finally:
                 raise typer.Exit(code=exit_code)
 
         return wrapper
