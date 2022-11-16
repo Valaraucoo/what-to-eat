@@ -16,8 +16,8 @@ def exception(ex: type[Exception], exit_code: int = 1) -> Callable[..., T]:
             except ex as e:
                 print(f"[red u]{e}[/]")
                 raise typer.Exit(code=exit_code)
-            except Exception as e:
-                print(f"[red u]💥 Unexpected error[/]")
+            except Exception:
+                print("[red u]💥 Unexpected error[/]")
                 raise typer.Exit(code=exit_code)
 
         return wrapper

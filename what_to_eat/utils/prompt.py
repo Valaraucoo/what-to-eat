@@ -22,7 +22,7 @@ def select_action() -> str:
         ),
     ]
 
-    answers = inquirer.prompt(questions) or dict()
+    answers = inquirer.prompt(questions) or {}
     action = answers.get("action")
 
     return action
@@ -36,7 +36,7 @@ def select_restaurant(items: list[Item]) -> Restaurant:
             choices=[item.title for item in items],
         ),
     ]
-    answers = inquirer.prompt(questions) or dict()
+    answers = inquirer.prompt(questions) or {}
     answer = answers.get("restaurant")
 
     with Progress(
