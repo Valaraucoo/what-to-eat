@@ -1,4 +1,3 @@
-from functools import lru_cache
 from pathlib import Path
 from typing import Final
 
@@ -12,11 +11,10 @@ from what_to_eat.models.config import Config, Profile
 from what_to_eat.models.location import Location
 from what_to_eat.utils.prompt import confirm_overwrite, get_address, get_profile_name, select_action
 
-default_config_dir: Final[Path] = Path.home() / ".what-to-eat"
-config_file: Final[Path] = default_config_dir / ".what-to-eat-config.json"
+default_app_dir: Final[Path] = Path.home() / ".what-to-eat"
+config_file: Final[Path] = default_app_dir / ".what-to-eat-config.json"
 
 
-@lru_cache
 def load() -> Config:
     if not config_file.is_file():
         print("[red]💥 Config file not found, run [italic]what-to-eat configure[/italic] first")
@@ -65,8 +63,8 @@ def _create() -> Config:
         ]
     )
 
-    if not default_config_dir.is_dir():
-        default_config_dir.mkdir()
+    if not default_app_dir.is_dir():
+        default_app_dir.mkdir()
 
     config_file.write_bytes(config.json().encode())
 

@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "what-to-eat"
-version = "0.1.4"
+version = "0.1.5"
 description = "What to eat? CLI tool to interaction with Wolt API"
 authors = ["Kamil Woźniak <jestem.kamil.wozniak@gmail.com>"]
 readme = "README.md"
@@ -21,7 +21,7 @@ repository = "https://github.com/Valaraucoo/what-to-eat"
 documentation = "https://github.com/Valaraucoo/what-to-eat"
 
 [tool.poetry.group.dev.dependencies]
-ruff = "^0.0.118"
+ruff = "^0.0.124"
 pytest = "^7.2.0"
 mypy = "^0.990"
 factory-boy = "^3.2.1"
