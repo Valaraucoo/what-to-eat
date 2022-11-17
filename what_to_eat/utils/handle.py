@@ -13,11 +13,11 @@ def exception(expected_exception: type[Exception], exit_code: int = 1) -> Callab
         def wrapper(*args, **kwargs) -> T:
             try:
                 return func(*args, **kwargs)
+            except typer.Exit:
+                raise
             except expected_exception as e:
                 print(f"[red u]{e}[/]")
-            except Exception as e:
-                if isinstance(e, typer.Exit):
-                    raise e
+            except Exception:
                 print("[red u]💥 Unexpected error[/]")
             finally:
                 raise typer.Exit(code=exit_code)
