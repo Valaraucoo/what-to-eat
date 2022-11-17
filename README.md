@@ -81,6 +81,19 @@ $ what-to-eat ls --sort rating --ordering desc --limit 5
                                                         🍿 Restaurants in Kraków via wolt 🍿
 ```
 
+While using `ls` command you can also use option `query` to filter results by restaurant name, address or tags:
+
+```console
+$ what-to-eat ls --query Pizza --limit 3
+┏━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ No. ┃                          Restaurant ┃           Address ┃ Estimate time ┃ Delivery cost ┃ Rating ┃ Price ┃                  Tags ┃
+┡━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━┩
+│ 1   │ Pizzeria Caprese Chillzone Młynówka │    Racławicka 21, │   20 - 30 min │ (No delivery) │    8.4 │  💰💰 │        Italian, pizza │
+│ 2   │                            U Filipa │ Ul. Św. Filipa 25 │   30 - 40 min │ (No delivery) │    7.8 │    💰 │                 pizza │
+│ 3   │                  Baqaro - Rakowicka │      Rakowicka 11 │   25 - 35 min │ (No delivery) │      - │  💰💰 │ Italian, Pinsa, pizza │
+└─────┴─────────────────────────────────────┴───────────────────┴───────────────┴───────────────┴────────┴───────┴───────────────────────┘
+                                                   🍿 Restaurants in Kraków via wolt 🍿
+```
 
 By default your first profile is `default` one. But while listing restaurants you can change it using `profile` option:
 
@@ -88,20 +101,23 @@ By default your first profile is `default` one. But while listing restaurants yo
 $ what-to-eat ls --profile work
 ```
 
-You can also display restaurant details:
+You can also display restaurant details by using `ls` command with restaurant name:
 
 ```console
-$ what-to-eat ls 'KruKam Kraków'
-┏━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-┃ 🍕 KruKam Kraków ┃                       Kraków, ul. Krakowska 35A 🍕 ┃
-┡━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
-│           Rating │                           Amazing (9 / 10 reviews) │
-│            Price │                                               💰💰 │
-│          Website │ https://wolt.com/pl/pol/krakow/venue/krukam-krakow │
-│            Phone │                                      +48 533442291 │
-│  Payment Methods │                                               Card │
-│             Tags │                 Grocery, Healthy, Sweet, Specialty │
-└──────────────────┴────────────────────────────────────────────────────┘
+$ what-to-eat ls zapiecek
+┏━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃     🍕 Zapiecek ┃                       Kraków, Ul. Floriańska 20 🍕 ┃
+┡━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│          Rating │                           Amazing (9 / 20 reviews) │
+│           Price │                                                 💰 │
+│    Opening time │                                      10:00 - 20:45 │
+│         Website │ https://wolt.com/pl/pol/krakow/restaurant/zapiecek │
+│           Phone │                                      +48 124221345 │
+│       Estimates │                                         30 minutes │
+│ Payment Methods │                                               Card │
+│     Description │               Kultowy bar kanapkowo - sałatkowy... │
+│            Tags │                                    Sandwich, Salad │
+└─────────────────┴────────────────────────────────────────────────────┘
 ```
 
 However, perhaps the coolest options is to randomly select restaurants.
@@ -117,6 +133,17 @@ You can also enter a tag based on which a restaurant will be randomly selected:
 $ what-to-eat random --tag pizza
 ```
 
+Random command supports `technique` option, which allows you to choose the algorithm used to select a restaurant. The default value is `mix` and it means that the restaurant will be selected based on the ranking and delivery time.
+
+```console:
+$ what-to-eat random --technique mix
+```
+
+You can select one of the following techniques:
+- `mix` - the restaurant will be selected based on the ranking and delivery time.
+- `rating` - the restaurant will be selected based on the ranking.
+- `delivery_time` - the restaurant will be selected based on the delivery time.
+- `random` - the restaurant will be selected randomly.
 
 <h3>📚 License</h3>
 
