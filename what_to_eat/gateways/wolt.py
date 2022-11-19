@@ -18,7 +18,7 @@ class WoltApiError(Exception):
         super().__init__("[Wolt] Error when trying to get response from wolt api")
 
 
-@cache.use
+@cache.apply()
 def _sections(location: Location) -> list[Section]:
     params = urllib.parse.urlencode(
         {
@@ -39,7 +39,7 @@ def _sections(location: Location) -> list[Section]:
     return parse_obj_as(list[Section], response.json()["sections"])
 
 
-@cache.use
+@cache.apply()
 def _restaurant(venue_id: str) -> Restaurant:
     headers = {
         "app-language": "en",
@@ -52,9 +52,8 @@ def _restaurant(venue_id: str) -> Restaurant:
 
 
 def items(location: Location) -> list[Item]:
-    sections = parse_obj_as(list[Section], _sections(location))
-    return list({item for item in itertools.chain.from_iterable(s.items for s in sections) if item.venue})
+    return list({item for item in itertools.chain.from_iterable(s.items for s in _sections(location)) if item.venue})
 
 
 def restaurant(item: Item) -> Restaurant:
-    return parse_obj_as(Restaurant, _restaurant(item.link.target))
+    return _restaurant(item.link.target)

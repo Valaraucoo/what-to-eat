@@ -1,24 +1,22 @@
-from pydantic import parse_obj_as
-
 from what_to_eat.models import Ordering, Sort
 from what_to_eat.models.wolt import Item
 from what_to_eat.utils import cache
 
 
-@cache.use
-def _filter_by_title(items: list[Item], name: str) -> list[Item]:
+@cache.apply()
+def filter_by_title(items: list[Item], name: str) -> list[Item]:
     name = name.lower().strip()
     return list(filter(lambda i: name in i.title.lower(), items))
 
 
-@cache.use
-def _filter_by_tag(items: list[Item], tag: str) -> list[Item]:
+@cache.apply()
+def filter_by_tag(items: list[Item], tag: str) -> list[Item]:
     tag = tag.lower().strip()
     return list(filter(lambda i: i.venue and tag in i.venue.tags, items))
 
 
-@cache.use
-def _sort_by(items: list[Item], sort: Sort = Sort.NONE, ordering: Ordering = Ordering.ASC) -> list[Item]:
+@cache.apply()
+def sort_by(items: list[Item], sort: Sort = Sort.NONE, ordering: Ordering = Ordering.ASC) -> list[Item]:
     reverse = ordering == Ordering.DESC.value
     match sort:
         case Sort.RESTAURANT:
@@ -46,8 +44,8 @@ def _sort_by(items: list[Item], sort: Sort = Sort.NONE, ordering: Ordering = Ord
             return items
 
 
-@cache.use
-def _filter_by_query(items: list[Item], query: str) -> list[Item]:
+@cache.apply()
+def filter_by_query(items: list[Item], query: str) -> list[Item]:
     def _show_query(s: str) -> str:
         pos = s.lower().index(query)
         return s[:pos] + f"[u][yellow]{s[pos:pos + len(query)]}[/yellow][/u]" + s[pos + len(query) :]
@@ -68,19 +66,3 @@ def _filter_by_query(items: list[Item], query: str) -> list[Item]:
                     results.append(item)
                     break
     return results
-
-
-def filter_by_title(items: list[Item], name: str) -> list[Item]:
-    return parse_obj_as(list[Item], _filter_by_title(items, name))
-
-
-def filter_by_tag(items: list[Item], tag: str) -> list[Item]:
-    return parse_obj_as(list[Item], _filter_by_tag(items, tag))
-
-
-def sort_by(items: list[Item], sort: Sort, ordering: Ordering) -> list[Item]:
-    return parse_obj_as(list[Item], _sort_by(items, sort, ordering))
-
-
-def filter_by_query(items: list[Item], query: str) -> list[Item]:
-    return parse_obj_as(list[Item], _filter_by_query(items, query))

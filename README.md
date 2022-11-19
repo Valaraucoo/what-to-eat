@@ -1,5 +1,6 @@
 <h2>🍔 What to eat? 🍕</h2>
 
+![Release](https://github.com/Valaraucoo/what-to-eat/actions/workflows/release.yml/badge.svg)
 ![Build Status](https://github.com/Valaraucoo/what-to-eat/actions/workflows/tests.yml/badge.svg)
 [![PyPI](https://img.shields.io/pypi/v/what-to-eat.svg)](https://pypi.python.org/pypi/what-to-eat/)
 
@@ -16,6 +17,13 @@ Example usage:
 <p align="center">
     <img src="./images/ls-query-example.png" alt="demo" width="900"/>
 </p>
+
+<h4>✨ Features </h4>
+
+* 🍔 Query restaurants in your location
+* 🍕 Filter restaurants by name, cuisine, price, rating, delivery time, etc.
+* 🍗 Display restaurant details
+* 🍟 Random restaurant draw
 
 <h3>🛠️ Installation</h3>
 
