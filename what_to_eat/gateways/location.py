@@ -1,7 +1,6 @@
 import urllib.parse
 
 import httpx
-from pydantic import parse_obj_as
 
 from what_to_eat.models.location import Location
 from what_to_eat.utils import cache
