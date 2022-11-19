@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import pickle
 import time
 from functools import wraps
 from pathlib import Path
@@ -29,34 +30,39 @@ class Cache(HashableModel):
         self.data[key] = value
 
     def save(self) -> None:
-        cache_file.write_text(self.json())
+        cache_file.write_bytes(self.dumps())
+
+    def dumps(self) -> bytes:
+        return pickle.dumps(self)
 
     @classmethod
     def load(cls) -> Cache:
         if not cache_file.is_file():
             return cls(expires=int(time.time()) + two_minutes, data={})
-        return cls.parse_raw(cache_file.read_text())
+        return pickle.loads(cache_file.read_bytes())
 
 
-def cache_key(func: Callable[..., T], *args: Any, **kwargs: Any) -> Key:
+def default_key(func: Callable[..., T], *args: Any, **kwargs: Any) -> Key:
     return func.__name__ + str(args) + str(kwargs)
 
 
-def use(func: Callable[..., T]) -> Callable[..., T]:
-    @wraps(func)
-    def wrapper(*args: Any, **kwargs: Any) -> T:
-        cache = Cache.load()
-        if cache.is_expired():
-            cache = Cache(expires=int(time.time()) + two_minutes, data={})
+def apply(key: Callable = default_key) -> Callable[..., T]:
+    def inner(func: Callable[..., T]) -> Callable[..., T]:
+        @wraps(func)
+        def wrapper(*args: Any, **kwargs: Any) -> T:
+            cache = Cache.load()
+            if cache.is_expired():
+                cache = Cache(expires=int(time.time()) + two_minutes, data={})
 
-        key = cache_key(func, *args, **kwargs)
-        if value := cache.get(key):
+            _key = key(func, *args, **kwargs)
+            if value := cache.get(_key):
+                return value
+
+            value = func(*args, **kwargs)
+            cache.set(_key, value)
+            cache.save()
             return value
 
-        value = func(*args, **kwargs)
-        cache.set(key, value)
-        cache.save()
+        return wrapper
 
-        return value
-
-    return wrapper
+    return inner
