@@ -17,6 +17,13 @@ Example usage:
     <img src="./images/ls-query-example.png" alt="demo" width="900"/>
 </p>
 
+<h4>✨ Features </h4>
+
+* 🍔 Query restaurants in your location
+* 🍕 Filter restaurants by name, cuisine, price, rating, delivery time, etc.
+* 🍗 Display restaurant details
+* 🍟 Random restaurant draw
+
 <h3>🛠️ Installation</h3>
 
 You can install `what-to-eat` using [pip](https://pypi.org/project/what-to-eat/):

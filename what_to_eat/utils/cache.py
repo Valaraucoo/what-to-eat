@@ -46,7 +46,7 @@ def default_key(func: Callable[..., T], *args: Any, **kwargs: Any) -> Key:
     return func.__name__ + str(args) + str(kwargs)
 
 
-def apply(key: Callable = default_key) -> Callable[..., T]:
+def apply(key: Callable[..., Key] = default_key) -> Callable[..., T]:
     def inner(func: Callable[..., T]) -> Callable[..., T]:
         @wraps(func)
         def wrapper(*args: Any, **kwargs: Any) -> T:
