@@ -15,7 +15,7 @@ Why to use *what-to-eat*? How many times have you not known what to order for di
 Example usage:
 
 <p align="center">
-    <img src="./images/ls-query-example.png" alt="demo" width="900"/>
+    <img src="https://raw.githubusercontent.com/Valaraucoo/what-to-eat/master/images/ls-query-example.png" alt="demo" width="900"/>
 </p>
 
 <h4>✨ Features </h4>
