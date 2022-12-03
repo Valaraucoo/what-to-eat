@@ -53,7 +53,7 @@ def ls(
     ),
     limit: Optional[int] = typer.Option(None, "--limit", "-l", help="Limit results"),  # noqa: U007
 ) -> None:
-    """Finds best restaurants via Wolt API"""
+    """List restaurants queried from Wolt API."""
     profile = find_profile(profile_name)
     with Progress(
         SpinnerColumn(),
