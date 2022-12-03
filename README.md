@@ -1,15 +1,15 @@
-<h2>🍔 What to eat? 🍕</h2>
-
-![Release](https://github.com/Valaraucoo/what-to-eat/actions/workflows/release.yml/badge.svg)
-![Build Status](https://github.com/Valaraucoo/what-to-eat/actions/workflows/tests.yml/badge.svg)
-[![PyPI](https://img.shields.io/pypi/v/what-to-eat.svg)](https://pypi.python.org/pypi/what-to-eat/)
-
-
+<h1>🍔 What to eat? 🍕</h1>
 <p align="center">
     <em>CLI tool to query Wolt API in your location!</em>
 </p>
 
----
+![Release](https://github.com/Valaraucoo/what-to-eat/actions/workflows/release.yml/badge.svg)
+![Build Status](https://github.com/Valaraucoo/what-to-eat/actions/workflows/tests.yml/badge.svg)
+[![PyPI](https://img.shields.io/pypi/v/what-to-eat.svg)](https://pypi.python.org/pypi/what-to-eat/)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/ambv/black)
+
+
+
 Why to use *what-to-eat*? How many times have you not known what to order for dinner or lunch? *What-to-eat* will help you querying and filtering restaurants available in your location via [Wolt](https://wolt.com/pl/discovery) app! 🍔
 
 Example usage:
@@ -18,14 +18,16 @@ Example usage:
     <img src="https://raw.githubusercontent.com/Valaraucoo/what-to-eat/master/images/ls-query-example.png" alt="demo" width="900"/>
 </p>
 
-<h4>✨ Features </h4>
+<h2>✨ Features </h2>
 
 * 🍔 Query restaurants in your location
 * 🍕 Filter restaurants by name, cuisine, price, rating, delivery time, etc.
 * 🍗 Display restaurant details
 * 🍟 Random restaurant draw
 
-<h3>🛠️ Installation</h3>
+<h2>🛠️ Installation</h2>
+
+*What to eat* is compatible with Python 3.10+ and runs on Linux, macOS and Windows. The latest releases with binary wheels are available from pip. Before you install *What to eat* and its dependencies, make sure that your pip, setuptools and wheel are up to date.
 
 You can install `what-to-eat` using [pip](https://pypi.org/project/what-to-eat/):
 
@@ -33,7 +35,7 @@ You can install `what-to-eat` using [pip](https://pypi.org/project/what-to-eat/)
 pip install what-to-eat
 ```
 
-<h3>💬 Available commands</h3>
+<h2>💬 Available commands</h2>
 
 There are currently 3 commands available, one of which is used to configure the tool: `configure`, `ls`, `random`:
 
@@ -59,7 +61,7 @@ $ what-to-eat --help
 You can find examples of using these commands in the section below.
 
 
-<h3>✨ Examples</h3>
+<h2>✨ Examples</h2>
 Configure your tool:
 
 ```console
@@ -153,6 +155,6 @@ You can select one of the following techniques:
 - `delivery_time` - the restaurant will be selected based on the delivery time.
 - `random` - the restaurant will be selected randomly.
 
-<h3>📚 License</h3>
+<h2>📚 License</h2>
 
 This project is licensed under the terms of the MIT license.
