@@ -35,7 +35,7 @@ python-versions = ">=3.5"
 dev = ["cloudpickle", "coverage[toml] (>=5.0.2)", "furo", "hypothesis", "mypy (>=0.900,!=0.940)", "pre-commit", "pympler", "pytest (>=4.3.0)", "pytest-mypy-plugins", "sphinx", "sphinx-notfound-page", "zope.interface"]
 docs = ["furo", "sphinx", "sphinx-notfound-page", "zope.interface"]
 tests = ["cloudpickle", "coverage[toml] (>=5.0.2)", "hypothesis", "mypy (>=0.900,!=0.940)", "pympler", "pytest (>=4.3.0)", "pytest-mypy-plugins", "zope.interface"]
-tests_no_zope = ["cloudpickle", "coverage[toml] (>=5.0.2)", "hypothesis", "mypy (>=0.900,!=0.940)", "pympler", "pytest (>=4.3.0)", "pytest-mypy-plugins"]
+tests-no-zope = ["cloudpickle", "coverage[toml] (>=5.0.2)", "hypothesis", "mypy (>=0.900,!=0.940)", "pympler", "pytest (>=4.3.0)", "pytest-mypy-plugins"]
 
 [[package]]
 name = "blessed"
@@ -228,11 +228,11 @@ python-versions = "*"
 
 [[package]]
 name = "inquirer"
-version = "3.0.0"
+version = "3.1.1"
 description = "Collection of common interactive command line user interfaces, based on Inquirer.js"
 category = "main"
 optional = false
-python-versions = ">=3.8,<4.0"
+python-versions = ">=3.8"
 
 [package.dependencies]
 blessed = ">=1.19.0"
@@ -664,8 +664,8 @@ iniconfig = [
     {file = "iniconfig-1.1.1.tar.gz", hash = "sha256:bc3af051d7d14b2ee5ef9969666def0cd1a000e121eaea580d4a313df4b37f32"},
 ]
 inquirer = [
-    {file = "inquirer-3.0.0-py3-none-any.whl", hash = "sha256:a16c93ded4f9ead42812067f386999aec74d10f131d9a2f7c9e5be131e9f9899"},
-    {file = "inquirer-3.0.0.tar.gz", hash = "sha256:528725bfd7e18b063727529d2983cfa61e0e512042365a7697d89930588cb686"},
+    {file = "inquirer-3.1.1-py3-none-any.whl", hash = "sha256:e43ce52cde7f66e73cc24e2dda9afc686ca1c1e8df5b0b3277691083f07cdccc"},
+    {file = "inquirer-3.1.1.tar.gz", hash = "sha256:1a644cfb6a4e09a5bd82f9944274eabaa798aa920331c70a8a7550dda299943b"},
 ]
 jinxed = [
     {file = "jinxed-1.2.0-py2.py3-none-any.whl", hash = "sha256:cfc2b2e4e3b4326954d546ba6d6b9a7a796ddcb0aef8d03161d005177eb0d48b"},
