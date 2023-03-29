@@ -4,7 +4,8 @@ import pickle
 import time
 from functools import wraps
 from pathlib import Path
-from typing import Any, Callable, Final, TypeAlias, TypeVar
+from typing import Any, Final, TypeAlias, TypeVar
+from collections.abc import Callable
 
 from what_to_eat.models import HashableModel
 

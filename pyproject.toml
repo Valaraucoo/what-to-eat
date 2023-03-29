@@ -35,7 +35,7 @@ build-backend = "poetry.core.masonry.api"
 line-length = 120
 target-version = "py311"
 select = ["E", "F", "Q", "U", "N", "C", "B", "T"]
-ignore = ["T201", "E999", "B008"]
+ignore = ["T201", "E999", "B008", "B904"]
 
 [tool.mypy]
 python_version = "3.11"
