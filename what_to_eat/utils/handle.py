@@ -1,6 +1,6 @@
+from collections.abc import Callable
 from functools import wraps
 from typing import TypeVar
-from collections.abc import Callable
 
 import typer
 from rich import print
