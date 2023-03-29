@@ -1,5 +1,6 @@
+from collections.abc import Callable
 from enum import Enum
-from typing import Callable, Final, TypeAlias
+from typing import Final, TypeAlias
 
 from what_to_eat.models.wolt import Item
 

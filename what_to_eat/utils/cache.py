@@ -2,9 +2,10 @@ from __future__ import annotations
 
 import pickle
 import time
+from collections.abc import Callable
 from functools import wraps
 from pathlib import Path
-from typing import Any, Callable, Final, TypeAlias, TypeVar
+from typing import Any, Final, TypeAlias, TypeVar
 
 from what_to_eat.models import HashableModel
 
