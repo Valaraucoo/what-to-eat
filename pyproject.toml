@@ -12,7 +12,7 @@ what-to-eat = "what_to_eat.main:app"
 python = "^3.10"
 typer = {extras = ["all"], version = "^0.7.0"}
 pydantic = "^1.10.7"
-httpx = "^0.23.3"
+httpx = ">=0.23.3,<0.25.0"
 inquirer = ">=2.10.1,<4.0.0"
 
 [tool.poetry.urls]
