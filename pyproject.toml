@@ -23,7 +23,7 @@ documentation = "https://github.com/Valaraucoo/what-to-eat"
 [tool.poetry.group.dev.dependencies]
 ruff = "^0.0.124"
 pytest = "^7.2.2"
-mypy = "^0.990"
+mypy = ">=0.990,<1.4"
 factory-boy = "^3.2.1"
 pre-commit = "^3.2.1"
 
