@@ -18,8 +18,8 @@ def exception(expected_exception: type[Exception], exit_code: int = 1) -> Callab
                 raise
             except expected_exception as e:
                 print(f"[red u]{e}[/]")
-            except Exception:
-                print("[red u]💥 Unexpected error[/]")
+            except Exception as e:
+                print(f"[red u]💥 Unexpected error: {e}[/]")
             finally:
                 raise typer.Exit(code=exit_code)
 

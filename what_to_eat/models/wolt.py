@@ -28,7 +28,7 @@ class Venue(HashableModel):
     country: str
     currency: str
     delivery_price_int: int
-    estimate_range: str
+    estimate_range: str | None
     estimate: float
     delivers: bool
     short_description: str | None
