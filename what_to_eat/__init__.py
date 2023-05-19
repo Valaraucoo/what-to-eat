@@ -7,7 +7,7 @@ from rich import print
 try:
     __version__ = metadata.version(__package__)
 except PackageNotFoundError:
-    __version__ = "1.0.0"
+    __version__ = "1.0.3"
 
 
 def version_callback(value: bool):

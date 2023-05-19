@@ -21,15 +21,36 @@ def sort_by(items: list[Item], sort: Sort = Sort.NONE, ordering: Ordering = Orde
     match sort:
         case Sort.RESTAURANT:
             return sorted(items, key=lambda i: i.title, reverse=reverse)
+        case Sort.INVERTED_RESTAURANT:
+            return sorted(items, key=lambda i: i.title, reverse=not reverse)
         case Sort.ADDRESS:
             return sorted(items, key=lambda i: i.venue.address, reverse=reverse)
+        case Sort.INVERTED_ADDRESS:
+            return sorted(items, key=lambda i: i.venue.address, reverse=not reverse)
         case Sort.DELIVERY_COST:
             return sorted(items, key=lambda i: i.venue.estimate_range, reverse=reverse)
+        case Sort.INVERTED_DELIVERY_COST:
+            return sorted(items, key=lambda i: i.venue.estimate_range, reverse=not reverse)
         case Sort.ESTIMATE_TIME:
             return sorted(items, key=lambda i: i.venue.delivery_price_int, reverse=reverse)
+        case Sort.INVERTED_ESTIMATE_TIME:
+            return sorted(items, key=lambda i: i.venue.delivery_price_int, reverse=not reverse)
         case Sort.PRICE:
             return sorted(items, key=lambda i: i.venue.price_range, reverse=reverse)
+        case Sort.INVERTED_PRICE:
+            return sorted(items, key=lambda i: i.venue.price_range, reverse=not reverse)
         case Sort.RATING:
+            items_without_rating = list(filter(lambda i: i.venue and not i.venue.rating, items))
+            items_with_rating = list(filter(lambda i: i.venue and i.venue.rating, items))
+            return (
+                sorted(
+                    items_with_rating,
+                    key=lambda i: i.venue.rating.score,
+                    reverse=not reverse,
+                )
+                + items_without_rating
+            )
+        case Sort.INVERTED_RATING:
             items_without_rating = list(filter(lambda i: i.venue and not i.venue.rating, items))
             items_with_rating = list(filter(lambda i: i.venue and i.venue.rating, items))
             return (
