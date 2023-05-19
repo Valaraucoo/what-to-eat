@@ -3,26 +3,27 @@
 Command manual:
 
 ```console
-$ what-to-eat ls --help
-
- Usage: what-to-eat ls [OPTIONS] [RESTAURANT]
-
- List restaurants queried from Wolt API.
-
-╭─ Arguments ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
-│   restaurant      [RESTAURANT]  Restaurant name [default: None]                                                                                                                  │
-╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
-╭─ Options ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
-│ --query     -q      TEXT                                                                Query search for restaurants [default: None]                                             │
-│ --profile   -p      TEXT                                                                Profile name [default: None]                                                             │
-│ --tag       -t      TEXT                                                                Tag [default: None]                                                                      │
-│ --sort      -s      [none|restaurant|address|delivery_cost|estimate_time|rating|price]  Sort by: none, restaurant, address, delivery_cost, estimate_time, rating, price          │
-│                                                                                         [default: Sort.NONE]                                                                     │
-│ --ordering  -o      [asc|desc]                                                          Ordering: asc, desc [default: Ordering.ASC]                                              │
-│ --limit     -l      INTEGER                                                             Limit results [default: None]                                                            │
-│ --help                                                                                  Show this message and exit.                                                              │
-╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
-
+$ what-to-eat ls --help                     
+                                                                                                                                                                        
+ Usage: what-to-eat ls [OPTIONS] [RESTAURANT]                                                                                                                           
+                                                                                                                                                                        
+ List restaurants queried from Wolt API.                                                                                                                                
+                                                                                                                                                                        
+╭─ Arguments ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│   restaurant      [RESTAURANT]  Restaurant name [default: None]                                                                                                      │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ Options ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ --query     -q      TEXT                                                                    Query search for restaurants [default: None]                             │
+│ --profile   -p      TEXT                                                                    Profile name [default: None]                                             │
+│ --tag       -t      TEXT                                                                    Tag [default: None]                                                      │
+│ --sort      -s      [none|restaurant|-restaurant|address|-address|delivery_cost|-delivery_  Sort by: none, restaurant, -restaurant, address, -address,               │
+│                     cost|estimate_time|-estimate_time|rating|-rating|price|-price]          delivery_cost, -delivery_cost, estimate_time, -estimate_time, rating,    │
+│                                                                                             -rating, price, -price                                                   │
+│                                                                                             [default: Sort.NONE]                                                     │
+│ --ordering  -o      [asc|desc]                                                              Ordering: asc, desc [default: Ordering.ASC]                              │
+│ --limit     -l      INTEGER                                                                 Limit results [default: None]                                            │
+│ --help                                                                                      Show this message and exit.                                              │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
 ```
 
 By default your first profile is `default` one. But while listing restaurants you can change it using `profile` option:
