@@ -3,12 +3,12 @@
 Command manual:
 
 ```console
-$ what-to-eat ls --help                     
-                                                                                                                                                                        
- Usage: what-to-eat ls [OPTIONS] [RESTAURANT]                                                                                                                           
-                                                                                                                                                                        
- List restaurants queried from Wolt API.                                                                                                                                
-                                                                                                                                                                        
+$ what-to-eat ls --help
+
+ Usage: what-to-eat ls [OPTIONS] [RESTAURANT]
+
+ List restaurants queried from Wolt API.
+
 ╭─ Arguments ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
 │   restaurant      [RESTAURANT]  Restaurant name [default: None]                                                                                                      │
 ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
