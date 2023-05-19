@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "what-to-eat"
-version = "1.0.1"
+version = "1.0.2"
 description = "What to eat? CLI tool to interaction with Wolt API"
 authors = ["Kamil Woźniak <info@kamilwozniak.com>"]
 readme = "README.md"
