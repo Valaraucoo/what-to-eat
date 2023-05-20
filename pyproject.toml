@@ -10,7 +10,7 @@ what-to-eat = "what_to_eat.main:app"
 
 [tool.poetry.dependencies]
 python = "^3.10"
-typer = {extras = ["all"], version = "^0.7.0"}
+typer = {extras = ["all"], version = ">=0.7,<0.10"}
 pydantic = "^1.10.7"
 httpx = "^0.23.3"
 inquirer = ">=2.10.1,<4.0.0"
