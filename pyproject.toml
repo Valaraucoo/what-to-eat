@@ -21,7 +21,7 @@ repository = "https://github.com/Valaraucoo/what-to-eat"
 documentation = "https://github.com/Valaraucoo/what-to-eat"
 
 [tool.poetry.group.dev.dependencies]
-ruff = "^0.0.124"
+ruff = ">=0.0.124,<0.0.276"
 pytest = "^7.2.2"
 mypy = "^0.990"
 factory-boy = "^3.2.1"
