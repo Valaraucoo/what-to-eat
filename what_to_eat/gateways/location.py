@@ -14,7 +14,7 @@ class LocationError(Exception):
 @cache.apply()
 def get(address: str) -> Location:
     address = urllib.parse.quote(address)
-    response = httpx.get(f"https://nominatim.openstreetmap.org/search/{address}?format=json")
+    response = httpx.get(f"https://nominatim.openstreetmap.org/search?q={address}&format=json")
 
     if not response.is_success:
         raise LocationError()
