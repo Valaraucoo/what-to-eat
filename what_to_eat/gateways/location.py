@@ -19,4 +19,4 @@ def get(address: str) -> Location:
     if not response.is_success:
         raise LocationError()
 
-    return Location.parse_obj(response.json()[0])
+    return Location.model_validate(response.json()[0])

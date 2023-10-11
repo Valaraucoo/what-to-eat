@@ -20,7 +20,7 @@ def load() -> Config:
         print("[red]💥 Config file not found, run [italic]what-to-eat configure[/italic] first")
         raise typer.Exit(1)
     try:
-        config = Config.parse_raw(config_file.read_text())
+        config = Config.model_validate_json(config_file.read_text())
     except ValidationError as e:
         print(f"[red]💥 Config file is invalid: {e}")
         raise typer.Exit(1)
@@ -66,7 +66,7 @@ def _create() -> Config:
     if not default_app_dir.is_dir():
         default_app_dir.mkdir()
 
-    config_file.write_bytes(config.json().encode())
+    config_file.write_bytes(config.model_dump_json().encode())
 
     print("[green]🏁 Config was created successfully!")
     return config
@@ -85,7 +85,7 @@ def _add() -> Config:
 
     config.profiles.append(Profile(name=profile_name, address=address, location=detailed_location))
 
-    config_file.write_bytes(config.json().encode())
+    config_file.write_bytes(config.model_dump_json().encode())
 
     print("[green]🏁 Profile was added successfully!")
     return config
@@ -105,7 +105,7 @@ def _edit() -> Config:
     profile.address = get_address(profile.address)
     profile.location = _get_detailed_location(profile.address)
 
-    config_file.write_bytes(config.json().encode())
+    config_file.write_bytes(config.model_dump_json().encode())
 
     print("[green]🏁 Profile was updated successfully!")
     return config
@@ -128,7 +128,7 @@ def _set_default() -> Config:
     for p in config.profiles:
         p.is_default = p.name == profile
 
-    config_file.write_bytes(config.json().encode())
+    config_file.write_bytes(config.model_dump_json().encode())
 
     print("[green]🏁 Profile was updated successfully!")
     return config
@@ -144,7 +144,7 @@ def _remove() -> Config:
 
     config.profiles = list(filter(lambda p: p.name != profile, config.profiles))
 
-    config_file.write_bytes(config.json().encode())
+    config_file.write_bytes(config.model_dump_json().encode())
 
     print("[green]🏁 Profile was updated successfully!")
     return config

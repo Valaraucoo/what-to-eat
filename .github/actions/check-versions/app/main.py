@@ -3,7 +3,8 @@ from pathlib import Path
 from typing import Final
 
 import httpx
-from pydantic import BaseSettings, SecretStr
+from pydantic import SecretStr
+from pydantic_settings import BaseSettings
 
 
 class Settings(BaseSettings):
