@@ -31,6 +31,8 @@ class Cache(HashableModel):
         self.data[key] = value
 
     def save(self) -> None:
+        if not cache_file.is_file():
+            cache_file.parent.mkdir(parents=True, exist_ok=True)
         cache_file.write_bytes(self.dumps())
 
     def dumps(self) -> bytes:

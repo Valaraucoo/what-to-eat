@@ -2,7 +2,7 @@ import datetime
 from enum import Enum
 from typing import TypeAlias
 
-from pydantic import HttpUrl
+from pydantic import AnyUrl, HttpUrl
 
 from what_to_eat.models import HashableModel
 
@@ -17,7 +17,7 @@ class RatingDetail(HashableModel):
     neutral_percentage: int
     positive_percentage: int
     rating: int
-    score: int
+    score: float
     text: str
     volume: int
 
@@ -28,12 +28,12 @@ class Venue(HashableModel):
     country: str
     currency: str
     delivery_price_int: int
-    estimate_range: str | None
+    estimate_range: str | None = None
     estimate: float
     delivers: bool
-    short_description: str | None
+    short_description: str | None = None
     tags: list[str]
-    rating: Rating | None
+    rating: Rating | None = None
     price_range: int
 
     def format_tags(self) -> str:
@@ -78,7 +78,7 @@ class Item(HashableModel):
 
 class Section(HashableModel):
     name: str
-    title: str | None
+    title: str | None = None
     items: list[Item] = []
 
 
@@ -106,9 +106,9 @@ class Times(HashableModel):
 
 
 class Statistics(HashableModel):
-    mean: int | None
-    max: int | None
-    min: int | None
+    mean: int | None = None
+    max: int | None = None
+    min: int | None = None
 
 
 class Estimates(HashableModel):
@@ -132,12 +132,12 @@ class Restaurant(HashableModel):
     food_tags: list[str]
     phone: str | None
     price_range: int
-    public_url: HttpUrl
-    rating: RatingDetail | None
-    website: HttpUrl | None
+    public_url: HttpUrl | AnyUrl
+    rating: RatingDetail | None = None
+    website: HttpUrl | AnyUrl | None = None
     allowed_payment_methods: list[str]
     description: list[Translation]
-    estimates: Estimates | None
+    estimates: Estimates | None = None
     opening_times: dict[Weekday, list[Times]] = {}
 
     def format_estimates(self) -> str:
@@ -179,7 +179,7 @@ class Restaurant(HashableModel):
         return f"{self.phone[:3]} {self.phone[3:]}"
 
     def format_public_url(self) -> str:
-        return self.public_url
+        return str(self.public_url)
 
     def format_rating(self) -> str:
         if not self.rating:

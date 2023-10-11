@@ -3,7 +3,7 @@ import urllib.parse
 from typing import Final
 
 import httpx
-from pydantic import parse_obj_as
+from pydantic import TypeAdapter
 
 from what_to_eat.models.location import Location
 from what_to_eat.models.wolt import Item, Restaurant, Section
@@ -36,7 +36,7 @@ def _sections(location: Location) -> list[Section]:
     if not response.is_success:
         raise WoltApiError()
 
-    return parse_obj_as(list[Section], response.json()["sections"])
+    return TypeAdapter(list[Section]).validate_python(response.json()["sections"])
 
 
 @cache.apply()
@@ -48,7 +48,7 @@ def _restaurant(venue_id: str) -> Restaurant:
 
     if not response.is_success:
         raise WoltApiError()
-    return parse_obj_as(Restaurant, response.json()["results"][0])
+    return TypeAdapter(Restaurant).validate_python(response.json()["results"][0])
 
 
 def items(location: Location) -> list[Item]:

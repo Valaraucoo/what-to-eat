@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "what-to-eat"
-version = "1.0.4"
+version = "1.1.0"
 description = "What to eat? CLI tool to interaction with Wolt API"
 authors = ["Kamil Woźniak <info@kamilwozniak.com>"]
 readme = "README.md"
@@ -9,11 +9,12 @@ readme = "README.md"
 what-to-eat = "what_to_eat.main:app"
 
 [tool.poetry.dependencies]
-python = "^3.10"
-typer = {extras = ["all"], version = "^0.7.0"}
-pydantic = "^1.10.7"
-httpx = "^0.23.3"
+python = "^3.12"
+typer = {extras = ["all"], version = "^0.9.0"}
+pydantic = "^2.4.2"
+httpx = "^0.25.0"
 inquirer = ">=2.10.1,<4.0.0"
+pydantic-settings = "^2.0.3"
 
 [tool.poetry.urls]
 homepage = "https://github.com/Valaraucoo/what-to-eat"
@@ -21,9 +22,9 @@ repository = "https://github.com/Valaraucoo/what-to-eat"
 documentation = "https://github.com/Valaraucoo/what-to-eat"
 
 [tool.poetry.group.dev.dependencies]
-ruff = "^0.0.124"
+ruff = "^0.0.286"
 pytest = "^7.2.2"
-mypy = "^0.990"
+mypy = "^1.6.0"
 factory-boy = "^3.2.1"
 pre-commit = "^3.2.1"
 
@@ -33,12 +34,12 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.ruff]
 line-length = 120
-target-version = "py311"
+target-version = "py312"
 select = ["E", "F", "Q", "U", "N", "C", "B", "T"]
-ignore = ["T201", "E999", "B008", "B904"]
+ignore = ["T201", "E999", "B008", "B904", "UP040"]
 
 [tool.mypy]
-python_version = "3.11"
+python_version = "3.12"
 ignore_missing_imports = true
 strict_optional = false
 show_error_codes = true
@@ -57,4 +58,4 @@ profile = "black"
 
 [tool.black]
 line-length = 120
-target-version = ["py311"]
+target-version = ["py312"]
