@@ -27,7 +27,7 @@ Example usage:
 
 <h2>🛠️ Installation</h2>
 
-*What to eat* is compatible with Python 3.10+ and runs on Linux, macOS and Windows. The latest releases with binary wheels are available from pip. Before you install *What to eat* and its dependencies, make sure that your pip, setuptools and wheel are up to date.
+*What to eat* is compatible with Python 3.12+ and runs on Linux, macOS and Windows. The latest releases with binary wheels are available from pip. Before you install *What to eat* and its dependencies, make sure that your pip, setuptools and wheel are up to date.
 
 You can install `what-to-eat` using [pip](https://pypi.org/project/what-to-eat/):
 
