@@ -20,7 +20,7 @@ def build_items_table(items: list[Item]) -> Table:
         if venue := item.venue:
             table.add_row(
                 str(num),
-                item.title,
+                item.format_title(),
                 venue.format_address(),
                 venue.format_estimate_range(),
                 venue.format_delivery_price(),
@@ -42,10 +42,11 @@ def build_restaurant_table(restaurant: Restaurant) -> Table:
     table.add_row("Rating", restaurant.format_rating())
     table.add_row("Price", restaurant.format_price_range())
     table.add_row("Opening time", restaurant.format_opening_time())
+    table.add_row("Delivery time", restaurant.format_delivery_time())
+    table.add_row("Delivery methods", restaurant.format_delivery_methods())
     table.add_row("Website", restaurant.format_public_url())
     table.add_row("Phone", restaurant.format_phone())
-    table.add_row("Estimates", restaurant.format_estimates())
-    table.add_row("Payment Methods", restaurant.format_allowed_payment_methods())
+    table.add_row("Payment methods", restaurant.format_allowed_payment_methods())
     table.add_row("Description", restaurant.format_description())
     table.add_row("Tags", restaurant.format_tags())
 

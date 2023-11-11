@@ -7,7 +7,7 @@ from what_to_eat import config, controllers, version_callback
 from what_to_eat.gateways import wolt
 from what_to_eat.gateways.location import LocationError
 from what_to_eat.gateways.wolt import WoltApiError
-from what_to_eat.models import Ordering, Sort
+from what_to_eat.models.query import Ordering, Sort
 from what_to_eat.services.profile import find_profile
 from what_to_eat.services.weights import EvaluateTechnique
 from what_to_eat.utils import handle, validators

@@ -21,6 +21,10 @@ class Cache(HashableModel):
     expires: int
     data: dict[Key, Any]
 
+    def clear(self) -> None:
+        self.data.clear()
+        self.save()
+
     def is_expired(self) -> bool:
         return self.expires < int(time.time())
 

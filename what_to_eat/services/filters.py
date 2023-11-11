@@ -1,4 +1,4 @@
-from what_to_eat.models import Ordering, Sort
+from what_to_eat.models.query import Ordering, Sort
 from what_to_eat.models.wolt import Item
 from what_to_eat.utils import cache
 

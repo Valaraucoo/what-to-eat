@@ -5,8 +5,8 @@ from rich import print
 from rich.console import Console
 
 from what_to_eat.gateways import wolt
-from what_to_eat.models import Ordering, Sort
 from what_to_eat.models.config import Profile
+from what_to_eat.models.query import Ordering, Sort
 from what_to_eat.models.wolt import Item
 from what_to_eat.services import filters
 from what_to_eat.services.display import build_items_table, build_restaurant_table
@@ -66,7 +66,7 @@ def random_controller(items: list[Item], tag: str | None, technique: EvaluateTec
         items = filters.filter_by_tag(items, tag)
 
     if not items:
-        print("[red]No restaurants found")
+        print("[red]No restaurants found[/red]")
         raise typer.Exit(0)
 
     item = random.choices(population=items, weights=build_weights(items, technique), k=1)[0]
