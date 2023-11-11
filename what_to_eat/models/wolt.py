@@ -22,19 +22,30 @@ class RatingDetail(HashableModel):
     volume: int
 
 
+class Badge(HashableModel):
+    text: str
+    variant: str
+
+
 class Venue(HashableModel):
     name: str
     address: str
+    badges: list[Badge]
     country: str
     currency: str
-    delivery_price_int: int
+    delivers: bool
+    delivery_price_int: int | None = None
     estimate_range: str | None = None
     estimate: float
-    delivers: bool
-    short_description: str | None = None
+    # short_description: str | None = None
     tags: list[str]
     rating: Rating | None = None
     price_range: int
+
+    def format_badges(self) -> str:
+        if not self.badges:
+            return ""
+        return ", ".join(badge.text for badge in self.badges)
 
     def format_tags(self) -> str:
         return ", ".join(map(str.capitalize, self.tags))
@@ -51,12 +62,12 @@ class Venue(HashableModel):
         if self.delivery_price_int is None:
             return "-"
         if not self.delivers:
-            return "(No delivery)"
+            return "[green](No delivery)[/green]"
         return f"{self.delivery_price_int / 100:.2f} {self.currency}"
 
     def format_rating(self) -> str:
         if not self.rating:
-            return "-"
+            return "[green](No rating)[/green]"
         return str(self.rating.score)
 
     def format_price_range(self) -> str:
@@ -74,6 +85,13 @@ class Item(HashableModel):
     track_id: str
     link: Link
     venue: Venue | None = None
+
+    def format_title(self) -> str:
+        if self.venue is None:
+            return self.title
+        if not self.venue.badges:
+            return self.title
+        return f"{self.title} [green italic]({self.venue.format_badges()})[/green italic]"
 
 
 class Section(HashableModel):
@@ -130,32 +148,38 @@ class Restaurant(HashableModel):
     country: str
     currency: str
     food_tags: list[str]
-    phone: str | None
+    phone: str | None = None
     price_range: int
     public_url: HttpUrl | AnyUrl
     rating: RatingDetail | None = None
     website: HttpUrl | AnyUrl | None = None
     allowed_payment_methods: list[str]
     description: list[Translation]
+    short_description: list[Translation] = []
     estimates: Estimates | None = None
     opening_times: dict[Weekday, list[Times]] = {}
+    delivery_methods: list[str] = []
 
-    def format_estimates(self) -> str:
+    def format_delivery_time(self) -> str:
         if not self.estimates:
             return "-"
         return self.estimates.format()
 
     def format_description(self) -> str:
-        if not self.description:
+        if not self.short_description:
             return "-"
-        description = self.description[0].value
-        if len(description) > 30:
+
+        description = self.short_description[0].value
+
+        if len(description) > 60:
             description = description[:60] + "..."
+
         return description
 
     def format_opening_time(self) -> str:
         weekday = datetime.datetime.now().strftime("%A").lower()
         opening_times = self.opening_times.get(weekday)
+
         if not opening_times:
             return "-"
 
@@ -183,11 +207,18 @@ class Restaurant(HashableModel):
 
     def format_rating(self) -> str:
         if not self.rating:
-            return "-"
+            return "[green](No rating)[/green]"
         return f"{self.rating.text} ({self.rating.score} / {self.rating.volume} reviews)"
 
     def format_tags(self) -> str:
+        if not self.food_tags:
+            return "-"
         return ", ".join(f"[black on yellow]{tag.capitalize()}[/]" for tag in self.food_tags)
 
     def format_allowed_payment_methods(self) -> str:
         return ", ".join(map(str.capitalize, self.allowed_payment_methods))
+
+    def format_delivery_methods(self) -> str:
+        if not self.delivery_methods:
+            return "[green](No delivery)[/green]"
+        return ", ".join(f"[white on green]{tag.capitalize()}[/]" for tag in self.delivery_methods)

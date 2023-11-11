@@ -27,7 +27,6 @@ def _sections(location: Location) -> list[Section]:
         }
     )
 
-    # TODO: add language to config
     headers = {
         "app-language": "en",
     }
